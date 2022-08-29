@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../includes/head.ejs') %>
+
+    <body>
+        
+        <%- include("../includes/header") %>
+        <main>
+            <section id="article-pos">
+                <article class="flex-text">
+
+                </article>
+            </section>
+
+            <section class="contbannerlist">
+                <h2 class="bannerlist">
+                    <%= locals.title ? title : null %>
+                </h2>
+
+            </section>
+
+            <form class="search"  action="/product/search" method="GET">
+                <i class="fas fa-search"></i>
+                <input  class ="barraB" type="search" name="buscar" placeholder="Buscar por Origen">
+                <button class="boton1" type="submit">Buscar</button>
+              </form>
+         
+<% if (user != null && user.admin) { %>
+ 
+
+
+            <picture class="contemojimas">
+                <a href="/product/create"><i class="fas fa-plus-circle"></i></a>
+              
+            </picture>
+
+            <section class="contlistado">
+                <% if (locals.products) { %>
+                    
+                    <% if (products.length> 0) { %>
+                        
+                        <% products.forEach(product=> { %>
+                            <article class="listagral">
+                                <a class="contentlista" href="/product/<%= product.id %> ">
+                                    <% if (product.imagen) { %>
+                                        <img class="contentimagen" src="/uploads/<%= product.imagen.Url %> " alt=""
+                                            srcset="">
+                                        <% } %>
+                                            <ul class="contlis">
+                                                <li class="lilista">ORIGEN: <%= product.origen ? product.origen.country : null%>
+                                                </li>
+                                                <li class="lilista">TIPO DE GRANO: <%= product.grano ? product.grano.tipoDeGrano : null %>
+                                                </li>
+                                                <li class="lilista">CANTIDAD: <%= product.cantidad ? product.cantidad.Cantidad : null %> gr</li>
+                                                <li class="lilista">PRECIO: $ <%= product.Precio %>
+                                                </li>
+                                            </ul>
+                                    </a>
+                            </article>
+                            <% }) %>
+                                <% } else { %>
+                                    <section class="contsinproducto">
+                                        <h3 class="titulolist">Agregá algunos productos! </h3>
+                                        <i class="far fa-dizzy"></i>
+                                    </section>
+
+                                    <% } %>
+                                        <% } else { %>
+                                            <h3 class="titulolist">Hay pocos productos, ingresá más!</h3>
+                                            <i class="far fa-dizzy"></i>
+                                            <% } %>
+                                        </section>
+
+               <% } else { %>
+
+                
+            <section class="contlistado">
+                <% if (locals.products) { %>
+                    
+                    <% if (products.length> 0) { %>
+                        
+                        <% products.forEach(product=> { %>
+                            <article class="listagral">
+                                <a class="contentlista" href="/product/<%= product.id %> ">
+                                    <% if (product.imagen) { %>
+                                        <img class="contentimagen" src="/uploads/<%= product.imagen.Url %> " alt=""
+                                            srcset="">
+                                        <% } %>
+                                        <ul class="contlis">
+                                            <li class="lilista">ORIGEN: <%= product.origen ? product.origen.country : null%>
+                                            </li>
+                                            <li class="lilista">TIPO DE GRANO: <%= product.grano ? product.grano.tipoDeGrano : null %>
+                                            </li>
+                                            <li class="lilista">CANTIDAD: <%= product.cantidad ? product.cantidad.Cantidad : null %> gr</li>
+                                            <li class="lilista">PRECIO: $ <%= product.Precio %>
+                                            </li>
+                                        </ul>
+                                </a>
+                            </article>
+                            <% }) %>
+                                <% } else { %>
+                                    <section class="contsinproducto">
+                                        <h3 class="titulolist">Agregá algunos productos! </h3>
+                                        <i class="far fa-dizzy"></i>
+                                    </section>
+                                    <% } %>
+                                        <% } else { %>
+                                            <h3 class="titulolist">Hay pocos productos, ingresá más!</h3>
+                                            <i class="far fa-dizzy"></i>
+                                            <% } %>
+
+                   </section>
+
+                           <% } %>
+
+
+            </main>
+
+            <%- include("../includes/footer") %>
+    </body>
+
+</html>

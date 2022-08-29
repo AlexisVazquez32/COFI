@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include("../includes/head") %>
+
+    <body>
+        <%- include("../includes/header") %>
+
+            <main>
+                <h1 class="tituloprofile">
+                    <%= user.nombre %>
+                        <%= user.apellido %>
+                </h1>
+
+                <h4 class="EmailUser">Email: <%= user.email %>
+                </h4>
+                <section>
+                    <% if (user.avatar !=null) { %>
+
+                        <figure class="figura">
+                            <img class="fotoAvatar" src="/uploads/avatars/<%= user.avatars.Url %>"
+                                alt="photo <%= user.email %>">
+                        </figure>
+
+                        <% } else { %>
+                            <figure class="figura">
+                                <img class="avatar" src="/image/users/perfil.jpg" alt="photo <%= user.email %>">
+                            </figure>
+                            <% } %>
+                                <section class="editYtrash">
+
+                                    <article>
+                                        <form action="/users/upload/avatar" enctype="multipart/form-data" method="post">
+
+                                            <input type="file" name="avatar" id="avatar">
+
+                                            <button class="botonExit" type="submit">Actualizar</button>
+
+                                            <% if (locals.errors && errors.avatar) { %>
+                                                <p class="errors">
+                                                    <%= errors.avatar.msg %>
+                                                </p>
+                                                <% } %>
+
+                                        </form>
+
+
+                                    </article>
+                                    <article class="contenticonos">
+
+                                        <a href="/users/update/<%= user.id %>"><i class="fa fa-edit"></i></a>
+                                   
+
+                                        <form action="/users/delete/<%= user.id %>?m=DELETE" method="post">
+                                            <button class="tachito" type="submit">
+                                                <a class="fas fa-trash-alt"></a>
+                                            </button>
+                                        </form>
+                                    </article>
+                                </section>
+                            
+                                <form action="/users/logout" method="post">
+                                    <button class="botonExit" type="submit">LOGOUT</button>
+                                </form>
+
+
+
+
+                </section>
+
+
+            </main>
+            <%- include("../includes/footer") %>
+
+    </body>
+
+</html>

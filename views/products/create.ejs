@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../includes/head') %>
+
+    <body>
+        <%- include("../includes/header") %>
+            <main>
+                <section class="conttitle">
+                    <h2 class="title">
+                        <%= locals.title ? title : null %>
+                    </h2>
+                </section>
+                <section class="contformulario">
+
+
+                    <form class="formgral" action="/product/save" enctype="multipart/form-data" method="post">
+
+                        <label class="continput" for="origen">
+
+                            <select class="forminput" name="origen" id="origen">
+                                <option value="">Seleccioná un origen</option>
+                                <% origenes.forEach(element=> { %>
+                                    <option value="<%= element.id %>" <%=locals.oldData && (element.id == oldData.origen )
+                                        ? 'selected' :  "" %>>
+                                        <%= element.country %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+
+                                                <% if (locals.errors && errors.origen) { %>
+                                <p class="errormail">
+                                    <%= errors.origen.msg %>
+                                </p>
+                                <% } %>
+                        </label>
+
+
+
+                        <label class="continput" for="tipoDeGrano">
+
+                            <select class="forminput" name="tipoDeGrano" id="tipoDeGrano">
+                                <option value="">Seleccioná una molienda</option>
+                                <% granos.forEach(element=> { %>
+                                    <option value="<%= element.id %>" <%=locals.oldData && (element.id == oldData.tipoDeGrano )
+                                        ? 'selected' :  "" %>>
+                                        <%= element.tipoDeGrano %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                            <% if (locals.errors && errors.tipoDeGrano) { %>
+                                <p class="errormail">
+                                    <%= errors.tipoDeGrano.msg %>
+                                </p>
+                                <% } %>
+                        </label>
+
+
+
+
+                        <label for="cantidad" class="continput" >
+
+                            <select class="forminput" name="cantidad" id="cantidad">
+                                <option value="">¿Cuántos gramos?</option>
+
+                                <% gramos.forEach(element=> { %>
+                                    <option value="<%= element.id %>" <%=locals.oldData && (element.id == oldData.cantidad )
+                                        ? 'selected' :  "" %>>
+                        <%= element.Cantidad %> </option>
+                   <% }) %>
+
+                             </select>
+
+
+                           
+       
+                <% if (locals.errors && errors.cantidad) { %>
+                    <p class="errormail"><%= errors.cantidad.msg %> </p>
+                   <% } %>
+            </label>
+
+    <label class="continput" for="precio">
+        <input class="forminput inputPrecio"  type="number" name="precio" id="precio" placeholder="PRECIO" 
+        value="<%= locals.oldData ? oldData.precio : null%>"
+         >
+        
+            <% if (locals.errors && errors.precio) { %>
+                <p class="errormail"><%= errors.precio.msg %> </p>
+               <% } %>
+            
+    </label>
+
+    
+
+    <label class="contchek" for="oferta">OFERTA !
+        <input class="formchek" type="checkbox" name="oferta" id="oferta">
+    </label>
+
+    <label class="continput" for="imagen">
+        <input class="forminput1" type="file" name="imagen" id="imagen" multiple>
+        <% if (locals.errors && errors.imagen) { %>
+            <p class="errormail"><%= errors.imagen.msg %> </p>
+           <% } %>
+    </label>  
+
+
+    <fieldset class="continput1">    
+        <a class="boton1" href="/product">VOLVER</a>  
+        <button class="boton" type="submit">CREAR</button>
+    </fieldset>       
+</form> 
+    
+ </section>
+ <script src = "../js/productCreate.js"></script>
+</main>
+<%- include("../includes/footer") %> 
+</body>
+</html>    

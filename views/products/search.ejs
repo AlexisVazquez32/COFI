@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include("../includes/head") %>
+
+    <body>
+        <%- include("../includes/header") %>
+
+            <main>
+
+                <section class="conttitle">
+                    <h2 class="title">
+                        <%= locals.title ? title : null %>
+                    </h2>
+                </section>
+
+                <section >
+                    <% if (cafe.length > 0) { %>
+                        <article class="title-busqueda">Hay <%= cafe.length %> cafes con ese Origen</article>
+         
+            <% cafe.forEach(element => { %>
+                <section class= "conteinfo">
+                    <article class="cajaprod1">
+                            <a class="itemtext" href="/product/<%= element.id %> ">
+                               
+                                        <ul >
+                                            <li class="itemtext">ORIGEN: <%= element.origen.country %></li> 
+                                            <li class="itemtext">TIPO DE GRANO: <%= element.grano.tipoDeGrano %></li>                
+                                            <li class="itemtext">CANTIDAD: <%= element.cantidad.Cantidad  %> gr</li>
+                                            <li class="itemtext">PRECIO: $ <%= element.Precio %></li>
+                                        </ul>  
+                            </a>
+                        </article>
+                        </section>
+
+                            <% }) %>
+
+                            <% } else { %>
+                                <h2 class= "containh2">No hay resultados para esta búsqueda</h2>
+                                <% }%>
+
+                                        <article class="iconos1">
+                                            <a class="boton1" href="/product/">VOLVER</a>
+                                        </article>
+
+
+                </section>
+            </main>
+            <%- include("../includes/footer") %>
+    </body>
+
+</html>

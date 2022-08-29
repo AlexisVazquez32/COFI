@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include("../includes/head") %>
+
+    <body>
+        <%- include("../includes/header") %>
+
+            <main>
+                <section class="banner">
+                    <article class="imagenBanner">
+
+                        <h1 id="banner-txt">INGRESA</h1>
+                    </article>
+                </section>
+
+
+                <form action="/users/access" method="post" id="login">
+
+                    <h2>INGRESA TUS DATOS</h2>
+                    <section class="inputs">
+                    <fieldset>
+                        <input class="Email" type="text" placeholder="Email" name="email" id="email"
+                        value="<%= locals.oldData ? oldData.email : null%>">
+                    </fieldset>
+
+                    <fieldset>
+                        <input class="Contraseña" type="password" placeholder="Contraseña" id="password" name="password" value="">
+                        
+                    </fieldset>
+                </section>
+                    <fieldset class="check">
+                        <label for="">Recordame</label>
+                        <input type="checkbox" name="remember" id="remember">
+                    </fieldset>
+
+
+                    <fieldset class="BarraBotones">
+                        <button class="botonEnviar" type="submit">INGRESAR</button>
+                        <button class="botonReset" type="reset">BORRAR</button>
+                    </fieldset>
+                    <section >
+                        <% if (locals.errors && errors.email) { %>
+                            <p class="errormail"><%= errors.email.msg %> </p>
+                           <% } %>
+                           
+                           <% if (locals.errors && errors.password) { %>
+                               <p class="errorpass"><%= errors.password.msg %> </p>
+                              <% } %>
+                            </section>
+                    <section class="leyendas">
+                        <a class="olvidasteContraseña" href="">¿Olvidaste la Contraseña?</a>
+                        <a class="olvidasteUsuario" href="">¿Olvidaste el Usuario?</a>
+                    </section>
+                 
+                </form>
+              
+
+            </main>
+            
+            <%- include("../includes/footer") %>
+            <script src = "../js/login.js"></script>
+    </body>
+
+</html>
